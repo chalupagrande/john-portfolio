@@ -1,0 +1,109 @@
+.contact {
+  width: 100%;
+  margin: 3rem 0;
+  font-size: 18px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact__button {
+  background-color: black;
+  color: white;
+  border: 0px;
+  border-radius: 0;
+  font-weight: bold;
+  padding: 0.8rem;
+  transition: color 300ms;
+}
+
+.contact__button.is-submit {
+  background-color: blue;
+}
+
+.contact-form {
+  width: 100%;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  /* margin: 1rem 0; */
+  transition: opacity 300ms;
+}
+
+.contact-form__submit {
+  display: none;
+}
+
+.contact-form .form-item {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.contact-form input,
+.contact-form textarea {
+  font-family: monospace;
+  font-size: 16px;
+  line-height: 24px;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .contact-form {
+    width: auto;
+  }
+  .contact-form .form-item {
+    margin-top: 0.8rem;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+  }
+
+  .contact-form label {
+    min-width: 120px;
+    text-align: right;
+    padding-right: 0.5rem;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    width: 400px;
+  }
+}
+
+
+/*/           _            _   _
+//  __ _ _ _ (_)_ __  __ _| |_(_)___ _ _
+// / _` | ' \| | '  \/ _` |  _| / _ \ ' \
+// \__,_|_||_|_|_|_|_\__,_|\__|_\___/_||_|
+//*/
+
+.contact-form-transition-state--enter {
+  transition: opacity 300ms ease-in-out 300ms, height 300ms ease-in-out 300ms;
+  opacity: 0;
+  height: 0;
+}
+.contact-form-transition-state--enter-active {
+  transition: opacity 300ms ease-in-out 300ms, height 300ms ease-in-out 300ms;
+  height: 250px;
+  opacity: 1;
+}
+.contact-form-transition-state--enter-done {
+  height: 250px;
+  opacity: 1;
+}
+
+
+.spacer--enter {
+  padding-bottom: 0px;
+  transition: padding-bottom 300ms ease-in-out;
+}
+.spacer--enter-active {
+  padding-bottom: 250px;
+  transition: padding-bottom 300ms ease-in-out;
+}
+.spacer--enter-done {
+  padding-bottom: 0px;
+}

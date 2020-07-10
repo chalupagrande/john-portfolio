@@ -1,0 +1,32 @@
+.project-card {
+  position:relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: red;
+}
+
+.project-card .project-card__about {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.project-card:hover .project-card__about {
+  opacity: 1;
+}
+
+.project-card > img {
+  width: 300px;
+}
+
+.project-card__about {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0.3rem 0.5rem;
+  text-align: center;
+  font-size: 16px;
+  opacity: 1;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+}
