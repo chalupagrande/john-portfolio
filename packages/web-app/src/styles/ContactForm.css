@@ -22,6 +22,11 @@
   background-color: blue;
 }
 
+.contact__button.is-submit:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
 .contact-form {
   width: 100%;
   flex-flow: column nowrap;
@@ -49,6 +54,26 @@
   font-size: 16px;
   line-height: 24px;
   width: 100%;
+}
+
+.contact-message {
+  color: black;
+  padding:  0.5em;
+  min-width: 200px;
+  text-align: center;
+}
+
+.contact-message.warn {
+  background-color: rgb(89.8%, 81.4%, 36.7%);
+}
+
+.contact-message.success {
+  background-color: rgb(105, 245, 70);
+}
+
+.form__field-shift {
+  position: absolute;
+  left: -9999px;
 }
 
 @media (min-width: 600px) {
