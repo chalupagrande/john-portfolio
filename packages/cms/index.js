@@ -12,7 +12,7 @@ const { AdminUIApp } = require('@keystonejs/app-admin-ui');
 const { PasswordAuthStrategy } = require('@keystonejs/auth-password');
 const { S3Adapter } = require('@keystonejs/file-adapters');
 const { NextApp } = require('@keystonejs/app-next');
-const {initializeData} = require('./initializeData')
+const {initializeData} = require('./initialize-data')
 
 const PROJECT_NAME = 'john';
 const DEV = process.env.NODE_ENV !== 'production'
@@ -167,7 +167,7 @@ keystone.createList('User', {
     create: access.userIsAdmin,
     delete: access.userIsAdmin,
     auth: true,
-  },
+  }
 });
 
 const authStrategy = keystone.createAuthStrategy({

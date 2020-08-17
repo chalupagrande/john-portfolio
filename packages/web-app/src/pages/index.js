@@ -5,7 +5,6 @@ import ToTop from '../components/ToTop'
 import ContactForm from '../components/Contact'
 
 export default function Home({ projects }) {
-
   let cards = projects.map((p) => <ProjectCard key={p.id} {...p} />)
   return (
     <div className="home page">
