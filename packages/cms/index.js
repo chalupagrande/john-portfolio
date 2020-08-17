@@ -12,7 +12,7 @@ const { AdminUIApp } = require('@keystonejs/app-admin-ui');
 const { PasswordAuthStrategy } = require('@keystonejs/auth-password');
 const { S3Adapter } = require('@keystonejs/file-adapters');
 const { NextApp } = require('@keystonejs/app-next');
-const sharp = require('sharp')
+const {initializeData} = require('./initialize-data')
 
 const PROJECT_NAME = 'john';
 const DEV = process.env.NODE_ENV !== 'production'
@@ -51,7 +51,8 @@ const keystone = new Keystone({
   name: PROJECT_NAME,
   adapter: new MongooseAdapter(adapterConfig),
   secureCookies: !DEV,
-  cookieSecret: process.env.COOKIE_SECRET || 'very-secret'
+  cookieSecret: process.env.COOKIE_SECRET || 'very-secret',
+  onConnect: initializeData
 });
 
 keystone.createList('Project', {
@@ -92,20 +93,6 @@ keystone.createList('Photo', {
       adminDoc: 'For best results, resize images to 600x600. Images without a 1x1 ratio will be scaled to fit a square.',
       hooks: {
         beforeChange: async (ctx) => {
-          //resize if creating
-          debugger
-          console.log('CONTEXT', ctx.originalInput.file)
-          try {
-            ctx.originalInput.file.then(result => {
-              console.log('RESULT', result)
-              let stream = result.createReadStream()
-              let greyed = sharp(stream).greyscale()
-              console.log(greyed)
-            })
-          } catch (err) {
-            console.log(err)
-          }
-
           // delete the existing file if it exists
           if (ctx.existingItem && ctx.existingItem.file) {
             await photoAdapter.delete(ctx.existingItem.file);
@@ -167,13 +154,13 @@ keystone.createList('User', {
     },
   },
   // // List-level access controls
-  // access: {
-  //   read: access.userIsAdminOrOwner,
-  //   update: access.userIsAdminOrOwner,
-  //   create: access.userIsAdmin,
-  //   delete: access.userIsAdmin,
-  //   auth: true,
-  // },
+  access: {
+    read: access.userIsAdminOrOwner,
+    update: access.userIsAdminOrOwner,
+    create: access.userIsAdmin,
+    delete: access.userIsAdmin,
+    auth: true,
+  }
 });
 
 const authStrategy = keystone.createAuthStrategy({
@@ -187,7 +174,7 @@ module.exports = {
     new GraphQLApp(),
     new AdminUIApp({
       adminPath: '/admin',
-      // authStrategy
+      authStrategy
     }),
     new NextApp({dir: '../web-app'})
   ],
