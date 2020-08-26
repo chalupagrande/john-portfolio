@@ -35,6 +35,7 @@ export default function ContactForm(props) {
     e.preventDefault()
     let isSafe = sanitaryAndValid()
     if (isSafe) {
+      // TODO: send the message
       setUiState({ ...uiState, isLoading: true })
       setTimeout(() => setUiState({ ...uiState, message: 'Message Sent!', messageStatus: 'success', isLoading: false }), 2000)
     }
