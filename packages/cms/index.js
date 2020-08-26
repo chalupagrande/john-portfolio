@@ -186,7 +186,7 @@ module.exports = {
     }),
     new NextApp({dir: '../web-app'})
   ],
-  configureExpress: (appear)=> {
+  configureExpress: (app)=> {
     app.set('trust proxy', 1);
   }
 };

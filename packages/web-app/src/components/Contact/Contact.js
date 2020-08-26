@@ -36,8 +36,17 @@ export default function ContactForm(props) {
     let isSafe = sanitaryAndValid()
     if (isSafe) {
       // TODO: send the message
-      setUiState({ ...uiState, isLoading: true })
-      setTimeout(() => setUiState({ ...uiState, message: 'Message Sent!', messageStatus: 'success', isLoading: false }), 2000)
+      try {
+        const r = await axios({
+          method: 'post',
+          url: '/api/email',
+          data: state,
+        })
+        setUiState({ ...uiState, isLoading: true })
+      } catch (err) {
+        setUiState({ ...uiState, message: 'There was an error sending your message!', messageStatus: 'error', isLoading: false })
+      }
+
     }
   }
 
