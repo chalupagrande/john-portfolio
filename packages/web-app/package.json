@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@keystonejs/fields-wysiwyg-tinymce": "^5.3.2",
+    "@sendgrid/mail": "^7.2.4",
     "axios": "^0.19.2",
     "next": "latest",
     "next-transpile-modules": "^3.0.2",
