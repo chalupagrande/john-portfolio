@@ -1,8 +1,9 @@
 module.exports = {
   GET_ALL_PROJECTS: `
-    query {
-      allProjects {
+    query getAllProjects {
+      allProjects(sortBy: createdAt_DESC) {
         id
+        name
         description
         photo {
           file {
