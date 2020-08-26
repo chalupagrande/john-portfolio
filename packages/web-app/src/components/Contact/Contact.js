@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import validator from 'validator'
+import axios from 'axios'
 
 export default function ContactForm(props) {
   let submitButton = useRef(null)
@@ -35,18 +36,18 @@ export default function ContactForm(props) {
     e.preventDefault()
     let isSafe = sanitaryAndValid()
     if (isSafe) {
-      // TODO: send the message
       try {
+        setUiState({ ...uiState, isLoading: true })
         const r = await axios({
           method: 'post',
           url: '/api/email',
-          data: state,
+          data: formState
         })
-        setUiState({ ...uiState, isLoading: true })
+        setUiState({ ...uiState, message: "Message Sent", messageStatus: 'success', isLoading: false })
       } catch (err) {
-        setUiState({ ...uiState, message: 'There was an error sending your message!', messageStatus: 'error', isLoading: false })
+        console.error(err)
+        setUiState({ ...uiState, message: "Oops. There was an error", messageStatus: 'error', isLoading: false })
       }
-
     }
   }
 
