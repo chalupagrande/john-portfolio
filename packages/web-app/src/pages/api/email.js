@@ -13,8 +13,14 @@ export default async function submitForm(req, res) {
       const payload = {
         to: recipientEmail,
         from: senderEmail,
-        subject: "You've got a message!",
-        text: JSON.stringify(req.body)
+        subject: "JohnTrainum.com got an message!",
+        text: `
+          HEY JOHN. This is Jamie's automated email system. You got an email on your website. Here is the information:
+
+          NAME: ${req.body.name}
+          EMAIL: ${req.body.email}
+          COMMENTS: ${req.body.comments}
+        `
       }
       let r = await sgMail.send(payload)
       res.send({msg: 'ok'})
